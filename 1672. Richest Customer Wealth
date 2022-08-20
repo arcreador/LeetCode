@@ -11,9 +11,7 @@ class Solution {
                 summ = summ + accounts[i][j];
             }
             
-            if(summ > big){
-                big = summ;
-            }
+            big = Math.max(big, summ);
         }
         
         return big;
