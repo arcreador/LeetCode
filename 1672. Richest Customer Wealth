@@ -8,7 +8,7 @@ class Solution {
             
             for(int j=0;j<accounts[i].length;j++){
                 
-                summ = summ + accounts[i][j];
+                summ+=accounts[i][j];
             }
             
             big = Math.max(big, summ);
