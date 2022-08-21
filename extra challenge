@@ -1,0 +1,14 @@
+class Main {                   \\main class
+
+  static double fun(double n){  \\funcation to calculate 2^n value.
+  
+  if(n==1 || n==0){   \\ base case
+    return 2;
+  }
+  return 2 * fun(n-1); \\ recursive call and small calculation 
+}
+
+  public static void main(String[] args) {                 \\main function
+    System.out.println(fun(23));                            \\function call
+  }
+}
