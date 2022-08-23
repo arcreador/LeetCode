@@ -11,8 +11,8 @@ class Solution
         }
         
         
-        helper(s,tempStr+s.charAt(i),i+1,list);
-        helper(s,tempStr,i+1,list);
+        helper(s,tempStr+s.charAt(i),i+1,list); \\take
+        helper(s,tempStr,i+1,list); \\non take
         
     }
     public List<String> AllPossibleStrings(String s)
