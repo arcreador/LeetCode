@@ -1,0 +1,68 @@
+//{ Driver Code Starts
+//Initial Template for Java
+
+import java.util.*;
+import java.io.*;
+import java.lang.*;
+
+class PhoneDigit
+{
+    public static void main(String args[])
+    {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();//testcases
+        
+        
+        while(t-- > 0)
+        {
+            int n = sc.nextInt(); // input size of array
+            int arr[] = new int[n]; //input the elements of array that are keys to be pressed
+            
+            for(int i = 0; i < n; i++)
+               arr[i] = sc.nextInt();//input the elements of array that are keys to be pressed
+            ArrayList <String> res = new Solution().possibleWords(arr, n);
+            for (String i : res) System.out.print (i + " ");
+             System.out.println();
+              
+        }
+    }
+}
+
+// } Driver Code Ends
+
+
+//User function Template for Java
+
+class Solution
+{
+    //Function to find list of all words possible by pressing given numbers.
+    static String key[] = {"0","0","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+    
+    static void helper(int a[],int n,String temp,int i,ArrayList<String> ans){
+        
+        if(i == n){
+            ans.add(temp);
+            return;
+        }
+        
+        for(int j=0; j < key[a[i]].length() ; j++){
+          
+          
+          helper(a,n,temp+key[a[i]].charAt(j),i+1,ans);
+          
+        }
+        
+        return;
+    }
+    
+    
+    static ArrayList <String> possibleWords(int a[], int N)
+    {
+        
+        ArrayList<String> ans = new ArrayList<>();
+        helper(a,N,"",0,ans);
+        return ans;
+    }
+}
+
+
