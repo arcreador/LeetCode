@@ -1,0 +1,43 @@
+class Solution {
+    
+    List<List<Integer>> ans= new ArrayList<>();
+    
+    public void helper(int[] candidates, List<Integer> list, int target,int sum,int k)    {
+        
+    
+        if(sum > target){
+            
+            return;
+        }
+        
+        if(k == candidates.length){
+            
+            if(target == sum){
+
+                ans.add(new ArrayList<>(list));
+               
+            } return;
+        }
+        
+        //inclusion
+        sum+=candidates[k];  
+        list.add(candidates[k]);
+        helper(candidates,list,target,sum,k);
+        sum-=candidates[k];
+        list.remove(list.size()-1);
+            
+        //exclusion  
+        helper(candidates,list,target,sum,k+1);
+        
+    }
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        
+        
+        List<Integer> list = new ArrayList<>();
+      
+        helper(candidates,list,target,0,0);
+        
+        return ans;
+        
+    }
+}
