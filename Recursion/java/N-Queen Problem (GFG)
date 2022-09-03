@@ -36,7 +36,6 @@ class GFG{
 
 class Solution{
     
-    static ArrayList<ArrayList<Integer>> ans = new ArrayList<ArrayList<Integer>>();
     
     static boolean isSafe(int n,int[][] arr,int r,int c){
         
@@ -66,7 +65,7 @@ class Solution{
     }
     
     
-    public static void helper(int n,int[][] arr,int r){
+    static ArrayList<ArrayList<Integer>> helper(int n,int[][] arr,int r,ArrayList<ArrayList<Integer>> ans){
         
         if(r == n){
             
@@ -83,24 +82,25 @@ class Solution{
                 }
             }
             ans.add(temp);
-            return;
         }
         
         for(int i = 0; i<n; i++){
             if(isSafe(n,arr,r,i)){
                 
                 arr[r][i] = 1;
-                helper(n,arr,r+1);
+                helper(n,arr,r+1,ans);
                 arr[r][i] =0;
                 
             }
         }
+        return ans;
     }
     static ArrayList<ArrayList<Integer>> nQueen(int n) {
         
+        ArrayList<ArrayList<Integer>> ans = new ArrayList<ArrayList<Integer>>();
         int[][] arr = new int[n][n];
-        helper(n,arr,0);
-        return ans;
+        return helper(n,arr,0,ans);
+       
         
         
     }
