@@ -1,0 +1,65 @@
+class Solution {
+    
+    
+    boolean isSafe(char[][]arr,int n,int r,int c){
+        
+        for(int i=0; i<r; i++){
+            if(arr[i][c] == 'Q'){
+                return false;
+            }
+        }
+        
+        for(int i=r-1,j=c-1; i>=0 && j>=0; i--,j--){
+            if(arr[i][j] == 'Q'){
+                return false;
+            }
+        }
+        
+        for(int i=r-1,j=c+1; i>=0 && j<n; i--,j++){
+            if(arr[i][j] == 'Q'){
+                return false;
+            }
+        }
+        
+        return true;
+    }
+    
+    public List<List<String>> helper(char[][] arr,List<List<String>> list,int n,int r){
+        
+        if(r==n){
+            List<String> temp = new ArrayList<String>();
+            
+            for(int i = 0;i<n;i++){
+                String s = new String(arr[i]);
+                temp.add(s);
+                
+            }
+            list.add(temp);
+            
+        }
+        
+        for(int i=0;i<n;i++){
+            if(isSafe(arr,n,r,i)){
+                
+                arr[r][i] = 'Q';
+                helper(arr,list,n,r+1);
+                arr[r][i] = '.';
+            }
+        }
+        return list;
+    }
+    
+    public List<List<String>> solveNQueens(int n) {
+        
+        List<List<String>> list = new ArrayList<>();
+        char[][] arr = new char[n][n];
+        
+        for(int i=0; i< n; i++){
+            for(int j=0; j< n; j++){
+                arr[i][j] = '.';
+            }
+        }
+        return helper(arr,list,n,0);
+        
+    }
+}
