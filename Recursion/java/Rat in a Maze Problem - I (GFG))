@@ -1,0 +1,113 @@
+//{ Driver Code Starts
+// Initial Template for Java
+
+import java.util.*;
+class Rat {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+
+        while (t-- > 0) {
+            int n = sc.nextInt();
+            int[][] a = new int[n][n];
+            for (int i = 0; i < n; i++)
+                for (int j = 0; j < n; j++) a[i][j] = sc.nextInt();
+
+            Solution obj = new Solution();
+            ArrayList<String> res = obj.findPath(a, n);
+            Collections.sort(res);
+            if (res.size() > 0) {
+                for (int i = 0; i < res.size(); i++)
+                    System.out.print(res.get(i) + " ");
+                System.out.println();
+            } else {
+                System.out.println(-1);
+            }
+        }
+    }
+}
+
+// } Driver Code Ends
+
+
+// User function Template for Java
+
+// m is the given matrix and n is the order of matrix
+class Solution {
+    
+    
+    
+    static boolean isSafe(int[][] m,int[][] visited,int n,int x, int y){
+        
+        if((x>=0 && x<n) && (y>=0 && y<n) && (m[x][y] == 1) && (visited[x][y] == 0)){
+            
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    
+    static void helper(int[][] m, int[][] visited,int n,String s,int x, int y,ArrayList<String> ans){
+        
+        if(x==n-1 && y == n-1){
+           
+            ans.add(s);
+            return;
+        }
+        
+        visited[x][y] = 1;
+        
+        //down
+        if(isSafe(m,visited,n,x+1,y)){
+            
+            helper(m,visited,n,s+"D",x+1,y,ans);
+        }
+        
+        //left
+        if(isSafe(m,visited,n,x,y-1)){
+            
+            helper(m,visited,n,s+"L",x,y-1,ans);
+        }
+        
+        //right
+        if(isSafe(m,visited,n,x,y+1)){
+            
+            helper(m,visited,n,s+"R",x,y+1,ans);
+        }
+        
+        //up
+        if(isSafe(m,visited,n,x-1,y)){
+            
+            helper(m,visited,n,s+"U",x-1,y,ans);
+            
+        }
+        
+        visited[x][y]=0;
+    }
+    
+    
+    
+    
+    public static ArrayList<String> findPath(int[][] m, int n) {
+       
+        ArrayList<String> ans = new ArrayList<String>();
+        
+        if(m[0][0] == 0){
+            
+            return ans;
+        }
+        
+        int[][] visted = new int[n][n];
+        for(int i=0; i<n; i++){
+            for(int j=0; j<n; j++){
+                visted[i][i] = 0;
+            }
+        }
+        
+        
+        helper(m,visted,n,"",0,0,ans);
+        
+        return ans;
+    }
+}
